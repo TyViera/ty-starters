@@ -6,9 +6,9 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>pe.ty</groupId>
-    <artifactId>ty-dependencies</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starters</artifactId>
+    <version>2.2.0.RELEASE</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
 
@@ -17,10 +17,12 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>ty-starters</name>
-  <description>Demo project for Spring Boot</description>
+  <description>Starters</description>
 
   <properties>
     <java.version>1.8</java.version>
+    <ty-framework.version>0.0.1-SNAPSHOT</ty-framework.version>
+    <jfrog-plugin.version>2.6.1</jfrog-plugin.version>
   </properties>
 
   <dependencies>
@@ -29,8 +31,48 @@
 
   <build>
     <plugins>
-
+      <plugin>
+        <groupId>org.jfrog.buildinfo</groupId>
+        <artifactId>artifactory-maven-plugin</artifactId>
+      </plugin>
     </plugins>
+
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <configuration>
+            <source>${java.version}</source>
+            <target>${java.version}</target>
+          </configuration>
+        </plugin>
+
+        <!--Artifactory deploy plugin-->
+        <plugin>
+          <groupId>org.jfrog.buildinfo</groupId>
+          <artifactId>artifactory-maven-plugin</artifactId>
+          <version>${jfrog-plugin.version}</version>
+          <executions>
+            <execution>
+              <id>build-info</id>
+              <goals>
+                <goal>publish</goal>
+              </goals>
+              <configuration>
+                <publisher>
+                  <contextUrl>{{ARTIFACTORY_CONTEXT_URL}}</contextUrl>
+                  <username>{{ARTIFACTORY_USER}}</username>
+                  <password>{{ARTIFACTORY_PASS}}</password>
+                  <repoKey>libs-release</repoKey>
+                  <snapshotRepoKey>libs-snapshot</snapshotRepoKey>
+                </publisher>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
   </build>
 
 </project>
