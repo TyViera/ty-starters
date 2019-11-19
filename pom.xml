@@ -21,6 +21,9 @@
 
   <properties>
     <java.version>1.8</java.version>
+
+    <javafaker.version>1.0.1</javafaker.version>
+
     <ty-framework.version>0.0.1-SNAPSHOT</ty-framework.version>
     <jfrog-plugin.version>2.6.1</jfrog-plugin.version>
   </properties>
@@ -38,6 +41,12 @@
 
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>com.github.javafaker</groupId>
+        <artifactId>javafaker</artifactId>
+        <version>${javafaker.version}</version>
+      </dependency>
+
       <dependency>
         <groupId>pe.ty</groupId>
         <artifactId>ty-core-dependencies</artifactId>
