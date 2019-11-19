@@ -43,6 +43,21 @@
         <artifactId>ty-core-dependencies</artifactId>
         <version>${ty-framework.version}</version>
       </dependency>
+      <dependency>
+        <groupId>pe.ty</groupId>
+        <artifactId>ty-starter-web</artifactId>
+        <version>${ty-framework.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>pe.ty</groupId>
+        <artifactId>ty-starter-webflux</artifactId>
+        <version>${ty-framework.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>pe.ty</groupId>
+        <artifactId>ty-starter-test</artifactId>
+        <version>${ty-framework.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
