@@ -26,6 +26,9 @@
 
     <ty-framework.version>0.0.1-SNAPSHOT</ty-framework.version>
     <jfrog-plugin.version>2.6.1</jfrog-plugin.version>
+
+    <test.unit.skip>false</test.unit.skip>
+    <test.integration.skip>true</test.integration.skip>
   </properties>
 
   <dependencies>
@@ -91,6 +94,55 @@
             <source>${java.version}</source>
             <target>${java.version}</target>
           </configuration>
+        </plugin>
+
+        <!-- Surefire - Unit tests -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <configuration>
+            <skip>${test.unit.skip}</skip>
+            <excludes>
+              **/*IntegrationTest*,
+              **/*ITTest*,
+              **/*ItTest*,
+              **/*Ittest*,
+              **/*ittest*
+            </excludes>
+          </configuration>
+          <executions>
+            <execution>
+              <phase>test</phase>
+              <goals>
+                <goal>test</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
+        <!-- Failsafe - Integration tests -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-failsafe-plugin</artifactId>
+          <configuration>
+            <skip>${test.integration.skip}</skip>
+            <includes>
+              <include>**/*IntegrationTest*</include>
+              <include>**/*ITTest*</include>
+              <include>**/*ItTest*</include>
+              <include>**/*Ittest*</include>
+              <include>**/*ittest*</include>
+            </includes>
+          </configuration>
+          <executions>
+            <execution>
+              <phase>verify</phase>
+              <goals>
+                <goal>integration-test</goal>
+                <goal>verify</goal>
+              </goals>
+            </execution>
+          </executions>
         </plugin>
 
         <!--Artifactory deploy plugin-->
